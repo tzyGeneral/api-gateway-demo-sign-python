@@ -3,8 +3,9 @@ from com.aliyun.api.gateway.sdk import client
 from com.aliyun.api.gateway.sdk.http import request
 from com.aliyun.api.gateway.sdk.common import constant
 
-host = "http://test-cn-qingdao.alicloudapi.com"
-url = "/api/billing/test/123243?queryparam=query1"
+# 这里为友盟一键登录接口
+host = "https://verify5.market.alicloudapi.com"
+url = "/api/v1/mobile/info?appkey=xxx"
 
 cli = client.DefaultClient(app_key="appKey", app_secret="appSecret")
 
@@ -15,23 +16,22 @@ cli = client.DefaultClient(app_key="appKey", app_secret="appSecret")
 
 #post body stream
 
-# import json
-# req_post = request.Request(host=host, protocol=constant.HTTP, url=url, method="POST", time_out=30000)
-# body = {}
-# body["name"] = "testName1111111"
-# body["address"] = "testAddress"
-# body["email"] = "testemail@123.com"
-# req_post.set_body(bytearray(source=json.dumps(body), encoding="utf8"))
-# req_post.set_content_type(constant.CONTENT_TYPE_STREAM)
-# print cli.execute(req_post)
+import json
+req_post = request.Request(host=host, protocol=constant.HTTP, url=url, method="POST", time_out=30000)
+body = {}
+body["token"] = "xxx"
+req_post.set_body(json.dumps(body))
+req_post.set_content_type(constant.CONTENT_TYPE_STREAM)
+_, _, data = cli.execute(req_post)
+print(json.loads(data))
 
 
 #post form
 
-req_post = request.Request(host=host, protocol=constant.HTTP, url=url, method="POST", time_out=30000)
-bodyMap = {}
-bodyMap["bodyForm1"] = "fwefwef"
-bodyMap["bodyForm2"] = "ffwefwef"
-req_post.set_body(bodyMap)
-req_post.set_content_type(constant.CONTENT_TYPE_FORM)
-print cli.execute(req_post)
+# req_post = request.Request(host=host, protocol=constant.HTTP, url=url, method="POST", time_out=30000)
+# bodyMap = {}
+# bodyMap["bodyForm1"] = "fwefwef"
+# bodyMap["bodyForm2"] = "ffwefwef"
+# req_post.set_body(bodyMap)
+# req_post.set_content_type(constant.CONTENT_TYPE_FORM)
+# print cli.execute(req_post)

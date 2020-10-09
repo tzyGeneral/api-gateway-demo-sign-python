@@ -20,9 +20,9 @@
 """
 MD5 tools module.
 
-Created on 9/28/2015
+Created on 10/09/2020
 
-@author: alex
+@author: zhenYuan
 """
 
 import hashlib
@@ -31,7 +31,7 @@ import base64
 
 def _get_md5(content):
     m = hashlib.md5()
-    m.update(buffer(content))
+    m.update(content.encode('utf-8'))
     return m.digest()
 
 
